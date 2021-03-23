@@ -29,7 +29,7 @@ def gen_alpha_coef():
     '''
     Generate alpha coefficient to determine the difference between layers in term of size
     '''
-    return round(random.uniform(0.5, 0.8), 2)
+    return round(random.uniform(0.2, 0.8), 2)
 
 # # get the number of node for each layer (randomly)
 def gen_layers_size(input_size, latent_size, alpha):

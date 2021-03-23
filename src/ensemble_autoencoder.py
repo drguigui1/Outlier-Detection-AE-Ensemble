@@ -75,7 +75,7 @@ class RandomAutoencoder:
         self.layers_size = gen_layers_size(input_size, self.latent_size, self.alpha)
 
         self.model = Autoencoder(self.layers_size).to('cpu')
-        self.optimizer = optim.Adam(self.model.parameters(), lr=1e-3, weight_decay=1e-4)
+        self.optimizer = optim.RMSprop(self.model.parameters(), lr=1e-3, weight_decay=1e-4)
         self.criterion = nn.MSELoss()
 
     def print_model(self):
@@ -126,7 +126,8 @@ class RandomAutoencoder:
         '''
         Get the outlier score vector of the autoencoder
         '''
-        outputs = self.model(datas.float())
+        datas = datas.float()
+        outputs = self.model(datas)
         return torch.sum((datas - outputs)**2, dim=1)
 
 
